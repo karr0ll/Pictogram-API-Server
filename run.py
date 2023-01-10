@@ -1,10 +1,14 @@
 from flask import Flask, jsonify
 import logging
 
-from app.main.views import *
+
+from bookmarks.views import add_bookmark_blueprint, load_bookmarks_blueprint, delete_bookmark_blueprint
+from main_page.dao.main_dao import MainDAO
+from main_page.views import main_page_blueprint
+from posts.dao.posts_dao import PostsDAO
+from posts.views import post_page_blueprint, search_blueprint, user_posts_blueprint
 
 app = Flask(__name__)
-print(app.config)
 
 app.config["JSON_AS_ASCII"] = False
 
@@ -13,7 +17,6 @@ app.register_blueprint(main_page_blueprint)
 app.register_blueprint(post_page_blueprint)
 app.register_blueprint(search_blueprint)
 app.register_blueprint(user_posts_blueprint)
-app.register_blueprint(tag_page_blueprint)
 app.register_blueprint(add_bookmark_blueprint)
 app.register_blueprint(load_bookmarks_blueprint)
 app.register_blueprint(delete_bookmark_blueprint)
@@ -39,8 +42,8 @@ filehandler.setFormatter(formatter)
 # добавляем обработчик
 log.addHandler(filehandler)
 
-
-
+posts_dao = PostsDAO()
+main_dao = MainDAO()
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -57,7 +60,7 @@ def internal_server_error(error):
 @app.route("/api/posts", methods=["GET"])
 def read_posts():
     """ обработка API-запроса всех постов, логирование запроса"""
-    posts = get_all_posts()
+    posts = main_dao.get_all_posts()
     log.info("Запрос /api/posts")
     return jsonify(posts)
 
@@ -65,7 +68,7 @@ def read_posts():
 @app.route("/api/posts/<int:pk>", methods=["GET"])
 def read_post(pk):
     """ обработка API-запроса поста по id, логирование запроса"""
-    post = get_post_by_pk(pk)
+    post = posts_dao.get_by_pk(pk)
     log.info(f"Запрос /api/posts/{pk}")
     return jsonify(post)
 
