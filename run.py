@@ -45,6 +45,7 @@ log.addHandler(filehandler)
 posts_dao = PostsDAO()
 main_dao = MainDAO()
 
+
 @app.errorhandler(404)
 def page_not_found(error):
     """ обработка ошибки 404(несуществующая страница)"""

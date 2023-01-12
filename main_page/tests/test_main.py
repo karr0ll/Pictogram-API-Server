@@ -12,6 +12,9 @@ def main_dao():
 class TestMain:
 
     def test_get_all_posts(self, main_dao):
+
+        """ тестрирования загрузки всех постов для главной страницы"""
+
         posts = main_dao.get_all_posts()
         expected_keys = {"poster_name", "poster_avatar", "pic", "content", "views_count",
                          "likes_count", "pk"}

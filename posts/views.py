@@ -11,6 +11,7 @@ user_posts_blueprint = Blueprint('user_posts', __name__, template_folder="templa
 comments_dao = CommentsDAO()
 posts_dao = PostsDAO()
 
+
 @post_page_blueprint.route("/posts/<int:post_id>/")
 def load_post(post_id):
     """ отображает все посты по их pk """

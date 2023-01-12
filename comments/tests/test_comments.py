@@ -13,6 +13,9 @@ class TestComments:
 
     @pytest.mark.parametrize("post_id", (1, 2, 3))
     def test_get_comments_by_post_id(self, post_id, comments_dao):
+
+        """ тестрирования загрузки комментов к постам"""
+
         data = comments_dao.get_by_post_id(post_id)
         expected_keys = {"post_id", "commenter_name", "comment", "pk"}
         for i in range(0, len(data)):

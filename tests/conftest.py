@@ -7,5 +7,3 @@ import run
 def test_client():
     app = run.app
     return app.test_client()
-
-

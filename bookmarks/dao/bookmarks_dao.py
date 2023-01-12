@@ -21,7 +21,6 @@ class BookmarksDAO:
             if post_id == post["pk"]:
                 return post
 
-
     def load_from_json(self):
         """
         Загружает все закладки из файла json
@@ -53,4 +52,3 @@ class BookmarksDAO:
         with open(os.path.join("data", "bookmarks.json"), "w", encoding="utf-8") as file:
             json.dump(bookmarks, file, ensure_ascii=False)
         return bookmarks
-

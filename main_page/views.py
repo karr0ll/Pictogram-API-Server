@@ -7,6 +7,7 @@ main_page_blueprint = Blueprint('main_page', __name__, template_folder="template
 main_dao = MainDAO()
 bookmarks_dao = BookmarksDAO()
 
+
 @main_page_blueprint.route('/')
 def page_index():
     """ отображает все посты """

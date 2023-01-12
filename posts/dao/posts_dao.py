@@ -2,14 +2,12 @@ import json
 import os
 
 
-
 class PostsDAO:
 
     def load_data(self):
         with open(os.path.join("data", "posts.json"), "r", encoding="utf-8") as file:
             posts = json.load(file)
             return posts
-
 
     def get_by_username(self, user_name):
         """
@@ -43,4 +41,3 @@ class PostsDAO:
                 return post
         else:
             raise ValueError("Такого поста нет")
-

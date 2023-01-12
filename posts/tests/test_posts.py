@@ -13,6 +13,9 @@ class TestPostsDao:
 
     @pytest.mark.parametrize("user_name", ("leo", "johnny"))
     def test_get_by_username(self, user_name, posts_dao):
+
+        """ тестрирования загрузки всех постов пользователя"""
+
         posts = posts_dao.load_data()
         posts_len = len(posts)
         expected_keys = {"poster_name", "poster_avatar", "pic", "content", "views_count",
@@ -22,6 +25,9 @@ class TestPostsDao:
 
     @pytest.mark.parametrize("s", ("кот", "так", "йцукен"))
     def test_search_for_posts(self, s, posts_dao):
+
+        """ тестрирование поиска"""
+
         posts = posts_dao.search_for_posts(s)
 
         try:
@@ -31,6 +37,9 @@ class TestPostsDao:
 
     @pytest.mark.parametrize("pk", (1, 2, 3))
     def test_get_post_by_pk(self, pk, posts_dao):
+
+        """ тестрирования загрузки постов по его pk"""
+
         post = posts_dao.get_by_pk(pk)
         expected_keys = {"poster_name", "poster_avatar", "pic", "content", "views_count",
                          "likes_count", "pk"}
